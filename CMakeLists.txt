@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.12)
+project(ddosd_cpp C CXX)
+
+set(CMAKE_COLOR_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+set(INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+find_package(PCAP REQUIRED)
+list(APPEND INCLUDE_DIRS ${PCAP_INCLUDE_DIR})
+list(APPEND LIBRARIES ${PCAP_LIBRARY})
+
+find_package(Boost REQUIRED COMPONENTS system program_options)
+list(APPEND INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
+list(APPEND LIBRARIES ${Boost_LIBRARIES})
+
+list(APPEND INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/include")
+
+file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
+file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+
+file(GLOB TOOL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/tools/*.cpp")
+foreach(TOOL_SOURCE ${TOOL_SOURCES})
+    get_filename_component(SOURCE_FILENAME ${TOOL_SOURCE} NAME)
+    string(REPLACE ".cpp" "" TOOL ${SOURCE_FILENAME})
+    add_executable(${TOOL} ${HEADERS} ${SOURCES} ${TOOL_SOURCE})
+    target_include_directories(${TOOL} PUBLIC ${INCLUDE_DIRS})
+    target_link_libraries(${TOOL} ${LIBRARIES})
+endforeach(TOOL_SOURCE ${TOOL_SOURCES})
