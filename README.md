@@ -14,7 +14,7 @@ The purpose of each tool is the following:
 
 ## Getting Started
 These instructions will guide you to build and run these tools.
-We consider an environment running Fedora 29.
+We consider an environment running Ubuntu 16.04 LTS
 
 ### Prerequisites
 - git
@@ -28,13 +28,13 @@ We consider an environment running Fedora 29.
 
 For installing all dependencies, run:
 ```
-sudo dnf install git cmake make gcc-c++ libpcap-devel boost boost-program-options
+sudo apt install git cmake make g++ libpcap-dev libboost-dev libboost-program-options-dev
 ```
 
 ### Building
 Use the following commands to build all tools:
 ```
-git clone https://github.com/aclapolli/ddosd-cpp.git
+git clone https://github.com/Island2112/ddosd-cpp.git
 cd ddosd-cpp
 mkdir build
 cd build
