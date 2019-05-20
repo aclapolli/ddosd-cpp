@@ -14,11 +14,11 @@ The purpose of each tool is the following:
 
 ## Getting Started
 These instructions will guide you to build and run these tools.
-We consider an environment running Ubuntu 16.04 LTS
+We consider an environment running Ubuntu 16.04 LTS.
 
 ### Prerequisites
 - git
-- CMake 3.12 or higher
+- CMake 3.12 or higher (see https://launchpad.net/~janisozaur/+archive/ubuntu/cmake-update)
 - GNU Make
 - A C++11 compiler
 - libpcap
