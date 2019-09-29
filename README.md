@@ -34,7 +34,7 @@ sudo apt install git cmake make g++ libpcap-dev libboost-dev libboost-program-op
 ### Building
 Use the following commands to build all tools:
 ```
-git clone https://github.com/asilha/ddosd-cpp.git
+git clone https://github.com/aclapolli/ddosd-cpp.git
 cd ddosd-cpp
 mkdir build
 cd build
