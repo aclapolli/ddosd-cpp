@@ -32,7 +32,7 @@ std::size_t PcapReader::l2HeaderLength() const {
         l2_header_length = 14;
     else if (mLinkType == DLT_C_HDLC)
         l2_header_length = 4;
-    else if (mLinkType == 12)
+    else if (mLinkType == 12 || mLinkType == DLT_IPV4)
         l2_header_length = 0;
     else
         throw std::runtime_error("unsupported link type " + std::to_string(mLinkType));
@@ -46,7 +46,7 @@ uint16_t PcapReader::l2EtherType(const PcapPacket& pcap_packet) const {
         ether_type = ntohs(*reinterpret_cast<const uint16_t*>(pcap_packet.data + 12));
     else if (mLinkType == DLT_C_HDLC)
         ether_type = ntohs(*reinterpret_cast<const uint16_t*>(pcap_packet.data + 2));
-    else if (mLinkType == 12)
+    else if (mLinkType == 12 || mLinkType == DLT_IPV4)
         ether_type = ETHERTYPE_IP;
     else
         throw std::runtime_error("unsupported link type " + std::to_string(mLinkType));

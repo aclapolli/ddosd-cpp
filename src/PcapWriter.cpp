@@ -10,7 +10,7 @@ namespace DDoSD {
 PcapWriter::PcapWriter(const std::string& pcap_filename, int linktype, int snaplen)
     : mLinkType(linktype) {
 
-    if (linktype != DLT_EN10MB && linktype != DLT_C_HDLC && linktype != 12)
+    if (linktype != DLT_EN10MB && linktype != DLT_C_HDLC && linktype != 12 && linktype != DLT_IPV4)
         throw std::runtime_error("unsupported link layer type (code " + std::to_string(linktype) + ")");
 
     mPcapHandler = pcap_open_dead(linktype, snaplen);
